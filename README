@@ -1,0 +1,43 @@
+
+Name: Costin-Tudor Rachieru
+Group: 324CA
+				Homework 1 - Forwarding
+
+		The logic of the main can be understood by reading the associated
+	coments on the right side (they also have the right indentation).
+	
+		Routing Table:
+		The routing table is parsed linearly and each entry is stored in a
+	struct route*:
+			-> prefix 
+			-> next_hop
+			-> mask 
+			-> interface 
+			The first three are stored as unsigned integers, not as a string.
+		Because I wanted to search for the best route in O(log n) time I had
+	to sort the routing table. I used qsort with a comparator made by me (it
+	sorts after the prefix (ex: 192.168.0.1 < 192.168.0.2 tranlated to an int)
+	and then after the mask). So now, if I have to chose a route, I will get
+	the last one matching prefix && mask == ip && mask. For that I used a simple
+	binary search.
+		The packets I do not find a route for will be droped and I will send an
+	ICMP DESTINATION_UNREACHABLE at the source.
+
+		ARP table:
+		A simple array of struct arp_entry* (starting empty):
+			-> ip address
+			-> mac address (stored in hexa value 6 x uint8_t)
+		As the arp table is not that big as the routing table I didn't sort it
+	and just implemented a linear search for the arp entry I need. I could have
+	implemented it in such a way that the arp table is sorted and I could have
+	performed a binary search on it, but the time did not allow me to do that
+	(some things took more than i had expected).
+
+		The packets I do not have the arp entry for will have to wait in a
+	queue (untill I make an ARP request and receive it's reply) and then I will
+	try to send as many packets as possible from the queue.
+
+		The function for the checksum is taken from a lab.
+
+		Also the router could notify you when he is ready to start its job (but
+	I commented this feature so it will be easier for the checker).

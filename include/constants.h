@@ -1,0 +1,24 @@
+// IMCP HEADER
+#define DEFAULT_ICMP_CODE 0
+
+// IP HEADER
+#define DEFAULT_IHL 5
+#define DEFAULT_TOS 0
+#define DEFAULT_FRAG_OFF 0
+#define DEFAULT_IP_VERSION 4
+#define DEFAULT_TTL 64
+
+// BYTES
+#define FIRST_BYTE 0
+#define SECOND_BYTE 1
+#define THIRD_BYTE 2
+#define FOURTH_BYTE 3
+
+// OHTER
+#define NO_ARP_ENTRY -10
+#define MAX_BYTE 255
+#define FORMAT_ARP_HARD 1
+#define LEN_HARD_ADDR_ARP 6
+#define LEN_PROT_ADD_ARP 4
+#define FORMAT_PROT_ADDR_ARP 8
+#define HALF 2
